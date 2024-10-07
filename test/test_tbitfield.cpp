@@ -247,11 +247,7 @@ TEST(TBitField, invert_plus_and_operator_on_different_size_bitfield)
   secondBf.SetBit(38);  //work
   secondBf.SetBit(35);// work
   //00001000.....10000000
-  //TBitField my(80);
-  //int k= secondBf.GetBit(70)& negFirstBf.GetBit(70);
-  //my = secondBf & negFirstBf;
-  testBf.SetBit(35); //work 
-  //EXPECT_EQ(my.GetBit(70), 0);
+  testBf.SetBit(35); 
   EXPECT_EQ(testBf, secondBf & negFirstBf);
 }
 
