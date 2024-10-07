@@ -90,9 +90,9 @@ TBitField& TBitField::operator=(const TBitField & bf) // присваивани�
 		MemLen = bf.MemLen;
 		delete[] pMem;
 		pMem = new TELEM[MemLen];
-		for (TELEM i = 0 ; i < BitLen ; i++)
+		for (TELEM i = 0 ; i < MemLen ; i++)
 		{
-			 if(bf.GetBit(i)) this->SetBit(i);
+			 pMem[i]=bf.pMem[i];
 		}
 	return *this;
 }
@@ -156,12 +156,9 @@ TBitField TBitField::operator&(const TBitField & bf) // операция "и"
 TBitField TBitField::operator~(void) // отрицание
 {
 	TBitField out(BitLen);
-	for( TELEM i = 0 ; i < out.MemLen;i++)
-	out.pMem[i]= ~pMem[i];
-	/*for(TELEM i = 0 ; i < BitLen ; i++)
+		for(TELEM i = 0 ; i < BitLen ; i++)
 		if((this->GetBit(i))) out.ClrBit(i);
-		else out.SetBit(i); ///прохожу по размеру bitlen
-		*/
+		else out.SetBit(i); 
 	return out;
 }
 
