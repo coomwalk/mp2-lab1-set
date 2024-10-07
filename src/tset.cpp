@@ -6,19 +6,21 @@
 // Множество - реализация через битовые поля
 
 #include "tset.h"
+#include <algorithm>
 
-TSet::TSet(int mp) : BitField(mp)
+TSet::TSet(int mp) : BitField(mp), MaxPower(mp)
 {
 
 }
 
 // конструктор копирования
-TSet::TSet(const TSet& s) : BitField(0)
+TSet::TSet(const TSet& s) : BitField(s.BitField), MaxPower(s.MaxPower)
 {
+
 }
 
 // конструктор преобразования типа
-TSet::TSet(const TBitField& bf) : BitField(0)
+TSet::TSet(const TBitField& bf) : BitField(bf), MaxPower(bf.GetLength())
 {
 }
 
@@ -34,58 +36,72 @@ int TSet::GetMaxPower(void) const // получить макс. к-во эл-т�
 
 int TSet::IsMember(const int Elem) const // элемент множества?
 {
-	return 0;
+	return BitField.GetBit(Elem);
 }
 
 void TSet::InsElem(const int Elem) // включение элемента множества
 {
+  BitField.SetBit(Elem);
 }
 
 void TSet::DelElem(const int Elem) // исключение элемента множества
 {
+  BitField.ClrBit(Elem);
 }
 
 // теоретико-множественные операции
 
 TSet& TSet::operator=(const TSet& s) // присваивание
 {
-	return *this;
+	MaxPower=s.MaxPower;
+  BitField=s.BitField;
+  return *this;
 }
 
 int TSet::operator==(const TSet& s) const // сравнение
 {
-	return 0;
+	return ((MaxPower==s.MaxPower) && (BitField==s.BitField));
 }
 
 int TSet::operator!=(const TSet& s) const // сравнение
 {
-  return 0;
+  return ((MaxPower!=s.MaxPower) || (BitField!=s.BitField));
 }
 
 TSet TSet::operator+(const TSet& s) // объединение
 {
-  return TSet(0);
+  TSet zxc(max(MaxPower,s.MaxPower));
+  zxc.BitField = BitField | s.BitField;
+  return zxc;
 }
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
-
-  return TSet(0);
+  TSet zxc(*this);
+  zxc.BitField.SetBit(Elem);
+  return zxc;
 }
 
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
-  return TSet(0);
+  TSet zxc(*this);
+  zxc.BitField.ClrBit(Elem);
+  return zxc;
 }
 
 TSet TSet::operator*(const TSet& s) // пересечение
 {
-  return TSet(0);
+  TSet zxc(max(MaxPower,s.MaxPower));
+  zxc.BitField = BitField & s.BitField;
+  return zxc;
+
 }
 
 TSet TSet::operator~(void) // дополнение
 {
-  return TSet(0);
+  TSet zxc(*this);
+  zxc.BitField=~zxc.BitField;
+  return zxc;
 }
 
 // перегрузка ввода/вывода
