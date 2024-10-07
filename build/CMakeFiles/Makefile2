@@ -225,8 +225,8 @@ gtest/CMakeFiles/gtest.dir/clean:
 # Target rules for target test/CMakeFiles/test_set.dir
 
 # All Build rule for target.
-test/CMakeFiles/test_set.dir/all: gtest/CMakeFiles/gtest.dir/all
 test/CMakeFiles/test_set.dir/all: src/CMakeFiles/set.dir/all
+test/CMakeFiles/test_set.dir/all: gtest/CMakeFiles/gtest.dir/all
 	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/test_set.dir/build.make test/CMakeFiles/test_set.dir/depend
 	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/test_set.dir/build.make test/CMakeFiles/test_set.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/aleksejkovalev/Documents/Study/mp2-lab1-set/build/CMakeFiles --progress-num=8,9,10,11 "Built target test_set"
